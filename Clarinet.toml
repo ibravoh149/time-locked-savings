@@ -1,0 +1,22 @@
+[project]
+name = "time-locked-savings"
+authors = []
+description = ""
+telemetry = true
+requirements = []
+[contracts.time-locked-savings]
+path = "contracts/time-locked-savings.clar"
+depends_on = []
+
+[repl]
+costs_version = 2
+parser_version = 2
+
+[repl.analysis]
+passes = ["check_checker"]
+
+[repl.analysis.check_checker]
+strict = false
+trusted_sender = false
+trusted_caller = false
+callee_filter = false
