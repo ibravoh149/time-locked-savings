@@ -15,8 +15,8 @@ Clarinet 1.5.4 or higher
 Node.js 14+ (for testing)
 Stacks wallet for deployment
 
-Installation
-bashCopy# Clone the repository
+### Installation
+Clone the repository
 git clone https://github.com/ibravoh149/time-locked-savings
 
 # Navigate to project directory
