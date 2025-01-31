@@ -58,3 +58,23 @@
         ))
     )
 )
+(define-public (withdraw)
+    (let
+        ((sender tx-sender)
+         (savings (unwrap! (get-savings-info sender) ERR_NO_SAVINGS)))
+        (asserts! (>= block-height (get lock-until savings)) ERR_LOCK_ACTIVE)
+        
+        (map-delete savings-vault { owner: sender })
+        (as-contract (stx-transfer? (get amount savings) tx-sender sender))
+    )
+)
+
+(define-public (authorize-emergency-withdrawer (withdrawer principal))
+    (let
+        ((sender tx-sender))
+        (ok (map-set authorized-withdrawers
+            { saver: sender, withdrawer: withdrawer }
+            { authorized: true }
+        ))
+    )
+)
