@@ -39,7 +39,7 @@ A secure, audited smart contract for time-locked savings on the Stacks blockchai
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/time-locked-savings
+   git clone https://github.com/ibravoh149/time-locked-savings
    cd time-locked-savings
    ```
 
@@ -172,11 +172,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-* **Project Lead**: [Name](mailto:email@domain.com)
-* **Security Contact**: security@domain.com
-* **Twitter**: [@projecthandle](https://twitter.com/projecthandle)
-* **Discord**: [Join our community](https://discord.gg/projectserver)
+* **Project Lead**: [Ibrahim](ibravoh149@gmail.com)
 
 ---
 
-Made with ❤️ by [Your Team/Organization]
+Made with ❤️ by [Ibrahim/Organization]
