@@ -78,3 +78,27 @@
         ))
     )
 )
+(define-public (emergency-withdraw (saver principal))
+    (let
+        ((sender tx-sender)
+         (savings (unwrap! (get-savings-info saver) ERR_NO_SAVINGS))
+         (is-authorized (unwrap-panic (get-withdrawer-status saver sender))))
+        (asserts! is-authorized ERR_UNAUTHORIZED)
+        
+        (map-delete savings-vault { owner: saver })
+        (as-contract (stx-transfer? (get amount savings) tx-sender saver))
+    )
+)
+
+;; Read-Only Functions
+
+(define-read-only (get-savings-info (owner principal))
+    (map-get? savings-vault { owner: owner })
+)
+
+(define-read-only (get-withdrawer-status (saver principal) (withdrawer principal))
+    (default-to
+        { authorized: false }
+        (map-get? authorized-withdrawers { saver: saver, withdrawer: withdrawer })
+    )
+)
