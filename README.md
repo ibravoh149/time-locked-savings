@@ -17,7 +17,7 @@ Stacks wallet for deployment
 
 Installation
 bashCopy# Clone the repository
-git clone https://github.com/yourusername/time-locked-savings
+git clone https://github.com/ibravoh149/time-locked-savings
 
 # Navigate to project directory
 cd time-locked-savings
