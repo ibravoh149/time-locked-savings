@@ -102,3 +102,7 @@
         (map-get? authorized-withdrawers { saver: saver, withdrawer: withdrawer })
     )
 )
+;; Error Handling and Security Checks
+(define-private (check-lock-expired (savings {amount: uint, lock-until: uint, emergency-contact: (optional principal)}))
+    (>= block-height (get lock-until savings))
+)
