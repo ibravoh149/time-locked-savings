@@ -21,3 +21,40 @@
     { saver: principal, withdrawer: principal }
     { authorized: bool }
 )
+
+;; Public Functions
+
+(define-public (create-savings-account (emergency-contact (optional principal)))
+    (let
+        ((sender tx-sender))
+        (ok (map-set savings-vault
+            { owner: sender }
+            {
+                amount: u0,
+                lock-until: u0,
+                emergency-contact: emergency-contact
+            }
+        ))
+    )
+)
+
+(define-public (deposit (amount uint) (lock-period uint))
+    (let
+        ((sender tx-sender)
+         (current-savings (get-savings-info sender)))
+        (asserts! (>= lock-period MIN_LOCK_PERIOD) ERR_INVALID_PERIOD)
+        (asserts! (> amount u0) ERR_AMOUNT_TOO_LOW)
+        (asserts! (is-none current-savings) ERR_LOCK_ACTIVE)
+        
+        (try! (stx-transfer? amount sender (as-contract tx-sender)))
+        
+        (ok (map-set savings-vault
+            { owner: sender }
+            {
+                amount: amount,
+                lock-until: (+ block-height lock-period),
+                emergency-contact: (get emergency-contact (unwrap-panic current-savings))
+            }
+        ))
+    )
+)
